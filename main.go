@@ -78,6 +78,13 @@ func main() {
 
 	// Define HTTP routes
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("panic: %v", err)
+				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			}
+		}()
+
 		tmpl := template.Must(template.New("index").Parse(indexTemplate))
 		err := tmpl.Execute(w, data)
 		if err != nil {
@@ -87,6 +94,13 @@ func main() {
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("panic: %v", err)
+				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			}
+		}()
+
 		query := r.FormValue("q")
 		year := r.FormValue("year")
 		results := searchCarModels(query, year, data.CarModels, data.Manufacturers)
@@ -99,6 +113,13 @@ func main() {
 	})
 
 	http.HandleFunc("/compare", func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Printf("panic: %v", err)
+				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			}
+		}()
+
 		if r.Method != http.MethodPost {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 			return
@@ -241,7 +262,6 @@ const searchTemplate = `
         <p><strong>Manufacturer:</strong> {{.ManufacturerName}}</p>
         <p><strong>Country:</strong> {{.ManufacturerCountry}}</p>
         <p><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</p>
-        <p><strong>Year:</strong> {{.Year}}</p> <!-- Добавлено отображение года -->
         <img src="/img/{{.Image}}" alt="{{.Name}}">
         <p><strong>Engine:</strong> {{.Specifications.Engine}}</p>
         <p><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</p>
