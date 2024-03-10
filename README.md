@@ -1,57 +1,44 @@
 
 Running the Application:
 
-1. Clone Repository or Download Files:
-Clone the repository containing the application code or download the files to your local computer.
+1. Clone the repository containing the application code or download the files to your local computer.
 
-2. Open Terminal:
-Open a terminal (command prompt) and navigate to the directory containing the application files.
+2. Open a terminal (command prompt) and navigate to the directory containing the application files.
 
-3. Run Application:
-Execute the application by typing go run main.go in the terminal. Upon successful execution, you should see a message indicating that the server is running at http://localhost:8080/.
+3. Execute the application by typing go run main.go in the terminal. Upon successful execution, you should see a message indicating that the server is running at http://localhost:8080/.
 
 Checking Server Availability:
 
-1. Open Web Browser:
-Launch a web browser such as Google Chrome or Mozilla Firefox.
+1. Launch a web browser such as Google Chrome or Mozilla Firefox.
 
-2. Enter URL:
-Enter http://localhost:8080/ in the address bar and press Enter.
+2. Enter http://localhost:8080/ in the address bar and press Enter.
 
-3. Verify Main Page:
-Ensure that the main page of the application titled "Car Models" is displayed, featuring a search field and a form for comparing cars.
+3. Ensure that the main page of the application titled "Car Models" is displayed, featuring a search field and a form for comparing cars.
 
 Searching for Cars:
 
-1. Enter Car Name:
-Input the name of a car (e.g., "Audi") into the search field on the main page.
+1. Input the name of a car (e.g., "Audi") into the search field on the main page.
 
 2. Click the "Search" button to initiate the search process.
 
-3. Verify Results:
-Confirm that search results are presented, showcasing found car models along with manufacturer details, country of production, release year, specifications, and an accompanying image.
+3. Confirm that search results are presented, showcasing found car models along with manufacturer details, country of production, release year, specifications, and an accompanying image.
 
 Searching for Cars by Year:
 
-1. Enter Production Year:
-Input the year of production of a car (e.g., "2024") into the search field on the main page.
+1. Input the year of production of a car (e.g., "2024") into the search field on the main page.
 
 2. Click the "Search" button to execute the search operation.
 
-3. Ensure Results:
-Ensure that search results are displayed, showcasing car models released in the specified year.
+3. Ensure that search results are displayed, showcasing car models released in the specified year.
 
 Comparing Cars:
 
-1. Select Car Models:
-On the main page, choose two car models from the provided drop-down lists.
+1. On the main page, choose two car models from the provided drop-down lists.
 
 2. Click the "Compare" button to proceed with the comparison.
 
-3. Verify Comparison Page:
-Confirm that a comparison page is presented, featuring the selected cars and their specifications arranged in a table format.
+3. Confirm that a comparison page is presented, featuring the selected cars and their specifications arranged in a table format.
 
 Checking Static Files:
 
-1. Ensure Accessibility:
-Confirm that the car images specified in the application data are accessible and correctly displayed on both the search and comparison pages.
+1. Confirm that the car images specified in the application data are accessible and correctly displayed on both the search and comparison pages.
