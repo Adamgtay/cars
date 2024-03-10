@@ -38,7 +38,3 @@ Comparing Cars:
 2. Click the "Compare" button to proceed with the comparison.
 
 3. Confirm that a comparison page is presented, featuring the selected cars and their specifications arranged in a table format.
-
-Checking Static Files:
-
-1. Confirm that the car images specified in the application data are accessible and correctly displayed on both the search and comparison pages.
