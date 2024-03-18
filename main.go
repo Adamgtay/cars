@@ -73,53 +73,30 @@ func main() {
 		log.Fatalf("Error loading JSON file: %v", err)
 	}
 
+	// Parse HTML templates
+	indexTemplate := parseTemplate("index.html")
+	searchTemplate := parseTemplate("search.html")
+	compareTemplate := parseTemplate("compare.html")
+
 	// Serve static files (images)
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("api/img"))))
 
 	// Define HTTP routes
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		defer func() {
-			if err := recover(); err != nil {
-				log.Printf("panic: %v", err)
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			}
-		}()
-
-		tmpl := template.Must(template.New("index").Parse(indexTemplate))
-		err := tmpl.Execute(w, data)
-		if err != nil {
-			handleInternalServerError(w, err)
-			return
-		}
+		// Handler function using indexTemplate
+		renderTemplate(w, indexTemplate, data)
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		defer func() {
-			if err := recover(); err != nil {
-				log.Printf("panic: %v", err)
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			}
-		}()
-
+		// Handler function using searchTemplate
 		query := r.FormValue("q")
 		year := r.FormValue("year")
 		results := searchCarModels(query, year, data.CarModels, data.Manufacturers)
-		tmpl := template.Must(template.New("search").Parse(searchTemplate))
-		err := tmpl.Execute(w, results)
-		if err != nil {
-			handleInternalServerError(w, err)
-			return
-		}
+		renderTemplate(w, searchTemplate, results)
 	})
 
 	http.HandleFunc("/compare", func(w http.ResponseWriter, r *http.Request) {
-		defer func() {
-			if err := recover(); err != nil {
-				log.Printf("panic: %v", err)
-				http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			}
-		}()
-
+		// Handler function using compareTemplate
 		if r.Method != http.MethodPost {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 			return
@@ -154,17 +131,28 @@ func main() {
 			}
 		}
 
-		tmpl := template.Must(template.New("compare").Parse(compareTemplate))
-		err := tmpl.Execute(w, cars)
-		if err != nil {
-			handleInternalServerError(w, err)
-			return
-		}
+		renderTemplate(w, compareTemplate, cars)
 	})
 
 	// Start the server
 	log.Println("Starting server on http://localhost:8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func parseTemplate(filename string) *template.Template {
+	tmpl, err := template.ParseFiles(filename)
+	if err != nil {
+		log.Fatalf("Error parsing template %s: %v", filename, err)
+	}
+	return tmpl
+}
+
+func renderTemplate(w http.ResponseWriter, tmpl *template.Template, data interface{}) {
+	err := tmpl.Execute(w, data)
+	if err != nil {
+		handleInternalServerError(w, err)
+		return
+	}
 }
 
 func handleInternalServerError(w http.ResponseWriter, err error) {
@@ -196,151 +184,3 @@ func searchCarModels(query, year string, carModels []CarModel, manufacturers []M
 	}
 	return results
 }
-
-const indexTemplate = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Models</title>
-</head>
-<body>
-    <h1>Car Models</h1>
-    <h2>Search Car Models</h2>
-    <form action="/search" method="get">
-        <input type="text" name="q" placeholder="Search...">
-        <input type="text" name="year" placeholder="Year (optional)">
-        <button type="submit">Search</button>
-    </form>
-    <h2>Select Car Models for Comparison</h2>
-    <form action="/compare" method="post">
-        <select name="carModelID1">
-            <option disabled selected>Select first car</option>
-            {{range .CarModels}}
-            <option value="{{.ID}}">{{.Name}}</option>
-            {{end}}
-        </select>
-        <select name="carModelID2">
-            <option disabled selected>Select second car</option>
-            {{range .CarModels}}
-            <option value="{{.ID}}">{{.Name}}</option>
-            {{end}}
-        </select>
-        <button type="submit">Compare</button>
-    </form>
-</body>
-</html>
-`
-
-const searchTemplate = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <style>
-        .car {
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .car img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Search Results</h1>
-    {{range .}}
-    <div class="car">
-        <h2>{{.Name}}</h2>
-        <p><strong>Manufacturer:</strong> {{.ManufacturerName}}</p>
-        <p><strong>Country:</strong> {{.ManufacturerCountry}}</p>
-        <p><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</p>
-        <img src="/img/{{.Image}}" alt="{{.Name}}">
-        <p><strong>Engine:</strong> {{.Specifications.Engine}}</p>
-        <p><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</p>
-        <p><strong>Transmission:</strong> {{.Specifications.Transmission}}</p>
-        <p><strong>Drivetrain:</strong> {{.Specifications.Drivetrain}}</p>
-    </div>
-    {{end}}
-</body>
-</html>
-`
-
-const compareTemplate = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Comparison</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <h1>Car Comparison</h1>
-    <table>
-        <tr>
-            <th>Feature</th>
-            {{range .}}
-            <th>{{.Name}}</th>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Manufacturer</td>
-            {{range .}}
-            <td>{{.ManufacturerID}}</td>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Year</td>
-            {{range .}}
-            <td>{{.Year}}</td>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Engine</td>
-            {{range .}}
-            <td>{{.Specifications.Engine}}</td>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Horsepower</td>
-            {{range .}}
-            <td>{{.Specifications.Horsepower}}</td>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Transmission</td>
-            {{range .}}
-            <td>{{.Specifications.Transmission}}</td>
-            {{end}}
-        </tr>
-        <tr>
-            <td>Drivetrain</td>
-            {{range .}}
-            <td>{{.Specifications.Drivetrain}}</td>
-            {{end}}
-        </tr>
-    </table>
-</body>
-</html>
-`

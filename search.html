@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        .car {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .car img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+    {{range .}}
+    <div class="car">
+        <h2>{{.Name}}</h2>
+        <p><strong>Manufacturer:</strong> {{.ManufacturerName}}</p>
+        <p><strong>Country:</strong> {{.ManufacturerCountry}}</p>
+        <p><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</p>
+        <img src="/img/{{.Image}}" alt="{{.Name}}">
+        <p><strong>Engine:</strong> {{.Specifications.Engine}}</p>
+        <p><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</p>
+        <p><strong>Transmission:</strong> {{.Specifications.Transmission}}</p>
+        <p><strong>Drivetrain:</strong> {{.Specifications.Drivetrain}}</p>
+    </div>
+    {{end}}
+</body>
+</html>
