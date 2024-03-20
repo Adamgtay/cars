@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Models</title>
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:3000/styles.css">
 </head>
 <body>
-    <h1>Car Models</h1>
-    <h2>Search Car Models</h2>
-    <form action="/search" method="get">
-        <input type="text" name="q" placeholder="Search...">
-        <input type="text" name="year" placeholder="Year (optional)">
-        <button type="submit">Search</button>
-    </form>
-    <h2>Select Car Models for Comparison</h2>
-    <form action="/compare" method="post">
-        <select name="carModelID1">
-            <option disabled selected>Select first car</option>
-            {{range .CarModels}}
-            <option value="{{.ID}}">{{.Name}}</option>
-            {{end}}
-        </select>
-        <select name="carModelID2">
-            <option disabled selected>Select second car</option>
-            {{range .CarModels}}
-            <option value="{{.ID}}">{{.Name}}</option>
-            {{end}}
-        </select>
-        <button type="submit">Compare</button>
-    </form>
+    <div class="container">
+        <img src="http://127.0.0.1:3000/images/logo.png" alt="logo">
+        <h2>Search Car Models</h2>
+        <form action="/search" method="get">
+            <input type="text" name="q" placeholder="Search...">
+            <input type="text" name="year" placeholder="Year (optional)">
+            <button type="submit">Search</button>
+        </form>
+        <h2>Select Car Models for Comparison</h2>
+        <form action="/compare" method="post">
+            <select name="carModelID1">
+                <option disabled selected>Select first car</option>
+                {{range .CarModels}}
+                <option value="{{.ID}}">{{.Name}}</option>
+                {{end}}
+            </select>
+            <select name="carModelID2">
+                <option disabled selected>Select second car</option>
+                {{range .CarModels}}
+                <option value="{{.ID}}">{{.Name}}</option>
+                {{end}}
+            </select>
+            <button type="submit">Compare</button>
+        </form>
+    </div>
 </body>
 </html>
