@@ -1,0 +1,188 @@
+@font-face {
+    font-family: 'TitleFont';
+    src: url('fonts/Arial Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SubFont';
+    src: url('fonts/Arial.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SearchFont';
+    src: url('fonts/Arial Bold Italic.ttf') format('truetype');
+}
+
+
+
+body {
+    font-family: 'TitleFont';
+    margin: 0;
+    padding: 0;
+    background-image: url('4076.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    max-width: 30%;
+    min-width: 150px;
+    margin: 5% auto;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ff6600ff;
+    border-radius: 5px; /* Apply border radius */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: center;
+    color: rgb(232, 232, 232);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 2%;
+    max-height: 100px;
+}
+
+.container .search-container,
+.container .compare-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 90%;
+    padding: 5%;
+    border: 1px solid rgb(97, 96, 98);
+    border-radius: 5px; /* Apply border radius */
+}
+
+.container .search-container form,
+.container .compare-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container .search-container form input,
+.container .compare-container form input,
+.container .search-container form select,
+.container .compare-container form select,
+.container .search-container form button,
+.container .compare-container form button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 40px;
+    width: 90%;
+    background-color: black;
+    border: 1px solid #b3b0b5ff;
+    border-radius: 5px; /* Apply border radius */
+    padding: 5px 10px;
+}
+
+.container .search-container h2,
+.container .compare-container h2 {
+    font-size: 20px;
+    text-align: center;
+    font-family: 'SubFont';
+}
+
+.container .search-container button[type="submit"],
+.container .compare-container button[type="submit"] {
+    margin-top: 20px;
+    min-height: 40px;
+    width: 100%;
+    border: 2px solid #ff6600ff;
+    border-radius: 5px; /* Apply border radius */
+
+}
+
+button[type="submit"] {
+    max-width: 60%;
+    background-color: rgb(0, 0, 0);
+    color: #b3b0b5ff;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+    font-family: 'TitleFont';
+    font-size: 100%;
+    text-align: center;   
+}
+
+
+.container .search-container form input:hover,
+.container .compare-container form input:hover,
+.container .search-container form select:hover,
+.container .compare-container form select:hover{
+    background-color: #333;
+    color: #fff;
+}
+.container .search-container form button:hover,
+.container .compare-container form button:hover {
+    background-color: #ff6600ff;
+    color: #fff;
+}
+
+.container .search-container form input,
+.container .compare-container form input{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 40px;
+    width: 80%;
+    background-color: black;
+    color: #fff;
+    border: 1px solid #b3b0b5ff;
+    border-radius: 5px; 
+    padding: 5px 10px;
+    font-family: 'TitleFont';
+    font-size: 15px;
+    text-align: center;
+    appearance: none; 
+}
+
+.container .search-container form select,
+.container .compare-container form select {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 40px;
+    width: 80%;
+    background-color: black;
+    color: #fff;
+    border: 1px solid #b3b0b5ff;
+    border-radius: 5px; /* Apply border radius */
+    padding: 5px 10px;
+    font-family: 'TitleFont';
+    font-size: 15px;
+    text-align: center;
+    appearance: none; 
+}
+
+.container .search-container form select option,
+.container .compare-container form select option {
+    background-color: black;
+    color: #fff;
+}
+
+.container .search-container form select::-ms-expand,
+.container .compare-container form select::-ms-expand {
+    display: none; 
+}
+
+.container .search-container form select::-webkit-scrollbar,
+.container .compare-container form select::-webkit-scrollbar {
+    display: none; 
+}
