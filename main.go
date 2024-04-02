@@ -78,65 +78,69 @@ func main() {
 	searchTemplate := parseTemplate("search.html")
 	compareTemplate := parseTemplate("compare.html")
 
-	// Serve static files (images)
-	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("static/img"))))
+	go func() {
 
-	// Define HTTP routes
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Handler function using indexTemplate
-		renderTemplate(w, indexTemplate, data)
-	})
+		// Serve static files (images)
+		http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("static/img"))))
 
-	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		// Handler function using searchTemplate
-		query := r.FormValue("q")
-		year := r.FormValue("year")
-		results := searchCarModels(query, year, data.CarModels, data.Manufacturers)
-		renderTemplate(w, searchTemplate, results)
-	})
+		// Define HTTP routes
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			// Handler function using indexTemplate
+			renderTemplate(w, indexTemplate, data)
+		})
 
-	http.HandleFunc("/compare", func(w http.ResponseWriter, r *http.Request) {
-		// Handler function using compareTemplate
-		if r.Method != http.MethodPost {
-			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-			return
-		}
+		http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
+			// Handler function using searchTemplate
+			query := r.FormValue("q")
+			year := r.FormValue("year")
+			results := searchCarModels(query, year, data.CarModels, data.Manufacturers)
+			renderTemplate(w, searchTemplate, results)
+		})
 
-		carModelID1 := r.FormValue("carModelID1")
-		carModelID2 := r.FormValue("carModelID2")
-
-		if carModelID1 == "" || carModelID2 == "" {
-			http.Error(w, "Please select exactly two car models to compare", http.StatusBadRequest)
-			return
-		}
-
-		cars := make([]CarModel, 2)
-		for i, idStr := range []string{carModelID1, carModelID2} {
-			id, err := strconv.Atoi(idStr)
-			if err != nil {
-				http.Error(w, "Invalid car model ID", http.StatusBadRequest)
+		http.HandleFunc("/compare", func(w http.ResponseWriter, r *http.Request) {
+			// Handler function using compareTemplate
+			if r.Method != http.MethodPost {
+				http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 				return
 			}
-			var found bool
-			for _, car := range data.CarModels {
-				if car.ID == id {
-					cars[i] = car
-					found = true
-					break
+
+			carModelID1 := r.FormValue("carModelID1")
+			carModelID2 := r.FormValue("carModelID2")
+
+			if carModelID1 == "" || carModelID2 == "" {
+				http.Error(w, "Please select exactly two car models to compare", http.StatusBadRequest)
+				return
+			}
+
+			cars := make([]CarModel, 2)
+			for i, idStr := range []string{carModelID1, carModelID2} {
+				id, err := strconv.Atoi(idStr)
+				if err != nil {
+					http.Error(w, "Invalid car model ID", http.StatusBadRequest)
+					return
+				}
+				var found bool
+				for _, car := range data.CarModels {
+					if car.ID == id {
+						cars[i] = car
+						found = true
+						break
+					}
+				}
+				if !found {
+					http.Error(w, "Invalid car model ID", http.StatusBadRequest)
+					return
 				}
 			}
-			if !found {
-				http.Error(w, "Invalid car model ID", http.StatusBadRequest)
-				return
-			}
-		}
 
-		renderTemplate(w, compareTemplate, cars)
-	})
+			renderTemplate(w, compareTemplate, cars)
+		})
+	}()
 
 	// Start the server
 	log.Println("Starting server on http://localhost:8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
+
 }
 
 func parseTemplate(filename string) *template.Template {
