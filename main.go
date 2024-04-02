@@ -79,7 +79,7 @@ func main() {
 	compareTemplate := parseTemplate("compare.html")
 
 	// Serve static files (images)
-	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("api/img"))))
+	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("static/img"))))
 
 	// Define HTTP routes
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
