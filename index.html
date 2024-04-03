@@ -18,22 +18,24 @@
                 <button type="submit">Search</button>
             </form>
         </div>
-        <h2>Select Car Models for Comparison</h2>
-        <form action="/compare" method="post">
-            <select name="carModelID1">
-                <option disabled selected>Select first car</option>
-                {{range .CarModels}}
-                <option value="{{.ID}}">{{.Name}}</option>
-                {{end}}
-            </select>
-            <select name="carModelID2">
-                <option disabled selected>Select second car</option>
-                {{range .CarModels}}
-                <option value="{{.ID}}">{{.Name}}</option>
-                {{end}}
-            </select>
-            <button type="submit">Compare</button>
-        </form>
+        <div class="compare-container">
+            <h2>Select Car Models for Comparison</h2>
+            <form action="/compare" method="post">
+                <select name="carModelID1">
+                    <option disabled selected>Select first car</option>
+                    {{range .CarModels}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
+                <select name="carModelID2">
+                    <option disabled selected>Select second car</option>
+                    {{range .CarModels}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
+                <button type="submit">Compare</button>
+            </form>
+        </div>    
     </div>
 </body>
 </html>
