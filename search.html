@@ -8,21 +8,20 @@
 </head>
 <body>
     <div class="searchpagecontainer">
-        <h2>Search Results</h2>
         {{range .}}
+        <h2>{{.Name}}</h2>
         <div class="inner-container">
-            <div class="car">
-                <h2>{{.Name}}</h2>
-                <h2>Manufacturer:</h2><h3><strong>{{.ManufacturerName}}</strong></h3>
-                <h2><strong>Country:</strong> {{.ManufacturerCountry}}</h2>
-                <h2><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</h2>
-                <img src="/img/{{.Image}}" alt="{{.Name}}">
-                <h2><strong>Engine:</strong> {{.Specifications.Engine}}</h2>
-                <h2><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</h2>
-                <h2><strong>Transmission:</strong> {{.Specifications.Transmission}}</h2>
-                <h2><strong>Drivetrain:</strong> {{.Specifications.Drivetrain}}</h2>
-            </div>
-            {{end}}
+            <div class="spec-container">
+            <h2>Manufacturer:<strong>{{.ManufacturerName}}</strong></h2>
+            <h2><strong>Country:</strong> {{.ManufacturerCountry}}</h2>
+            <h2><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</h2>
+            <h2><strong>Engine:</strong> {{.Specifications.Engine}}</h2>
+            <h2><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</h2>
+            <h2><strong>Transmission:</strong> {{.Specifications.Transmission}}</h2>
+            <h2><strong>Drivetrain:</strong> {{.Specifications.Drivetrain}}</h2>
+        </div>    
+            <img src="/img/{{.Image}}" alt="{{.Name}}">
+        {{end}}
         </div>    
     </div>    
 </body>
