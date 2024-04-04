@@ -77,6 +77,8 @@ body {
 }
 
 
+
+
 h2 {
     font-size: 20px;
     text-align: center;
@@ -93,10 +95,14 @@ h3 {
 
 img {
     min-width: 80%;
-    height: auto;
-    display: flex;
+    max-height: 400px;
     margin: 20px;
-    max-height: 80%;
+}
+
+.logo {
+    max-width: 80%;
+    max-height: 100px;
+    margin: 20px;
 }
 
 .container .search-container,
@@ -233,8 +239,29 @@ button[type="submit"] {
 
 /* search page */
 
-.car img {
+.car-img {
     width: auto;
     height: auto;
     margin-bottom: 10px;
+}
+
+/* compre page */
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-family: "TitleFont";
+    font-weight: 100;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(232, 232, 232);
+}
+th {
+    background-color: #f2f2f2;
+    color: rgb(7, 7, 7);
 }
