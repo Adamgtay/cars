@@ -11,16 +11,36 @@
         {{range .}}
         <h2>{{.Name}}</h2>
         <div class="inner-container">
-            <div class="spec-container">
-                <h2> Manufacturer:<strong>{{.ManufacturerName}}</strong></h2>
-                <h2><strong>Country:</strong> {{.ManufacturerCountry}}</h2>
-                <h2><strong>Founding Year:</strong> {{.ManufacturerFoundingYear}}</h2>
-                <h2><strong>Engine:</strong> {{.Specifications.Engine}}</h2>
-                <h2><strong>Horsepower:</strong> {{.Specifications.Horsepower}}</h2>
-                <h2><strong>Transmission:</strong> {{.Specifications.Transmission}}</h2>
-                <h2><strong>Drivetrain:</strong> {{.Specifications.Drivetrain}}</h2>
-
-            </div>
+                <table class="details-table">
+                    <tr>
+                        <td>Manufacturer:</td>
+                        <td><strong>{{.ManufacturerName}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Country:</td>
+                        <td><strong>{{.ManufacturerCountry}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Founding Year:</td>
+                        <td><strong>{{.ManufacturerFoundingYear}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Engine:</td>
+                        <td><strong>{{.Specifications.Engine}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Horsepower:</td>
+                        <td><strong>>{{.Specifications.Horsepower}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Transmission:</td>
+                        <td><strong>{{.Specifications.Transmission}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Drivetrain:</td>
+                        <td><strong>{{.Specifications.Drivetrain}}</strong></td>
+                    </tr>
+                </table>
             <img class="carpic" src="/img/{{.Image}}" alt="{{.Name}}">
     
         {{end}}

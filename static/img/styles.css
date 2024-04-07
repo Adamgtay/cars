@@ -1,3 +1,4 @@
+/* Fonts */
 @font-face {
     font-family: 'TitleFont';
     src: url('fonts/Arial Italic.ttf') format('truetype');
@@ -13,8 +14,7 @@
     src: url('fonts/Arial Bold Italic.ttf') format('truetype');
 }
 
-
-
+/* Body */
 body {
     font-family: 'TitleFont';
     margin: 0;
@@ -24,14 +24,15 @@ body {
     background-position: center;
 }
 
-.container {
+/* Containers */
+.container, .searchpagecontainer {
     max-width: 30%;
     min-width: 150px;
     margin: 5% auto;
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid #ff6600ff;
-    border-radius: 5px; /* Apply border radius */
+    border-radius: 5px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -40,62 +41,32 @@ body {
 
 .searchpagecontainer {
     max-width: 80%;
-    min-width: 150px;
     margin: 10% auto;
-    padding: 2%;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: 2px solid #ff6600ff;
-    border-radius: 5px; /* Apply border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.inner-container{
+.inner-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px;
-    width: 80%;
+    max-width: 80%;
     padding: 5%;
-    border: 1px solid rgb(97, 96, 98);
-    border-radius: 5px; /* Apply border radius */
-}
-
-.spec-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust columns based on content */
-    gap: 10px; /* Gap between grid items */
-    justify-items: start; /* Align items to the start of each grid cell */
-    align-items: start; /* Align items to the start of each grid cell */
-    width: 80%;
-    padding: 5%;
+    border-radius: 5px; 
     border: 1px solid rgb(255, 255, 255);
-    border-radius: 5px; /* Apply border radius */
+    margin: 20px;
 }
 
-
-
-
-h2 {
+/* Headings */
+h2, h3 {
     font-size: 20px;
     text-align: center;
     color: rgb(232, 232, 232);
 }
 
-h3 {
-    font-family: "SubFont";
-    font-weight: 100;
-    font-size: 20px;
-    text-align: center;
-    color: rgb(232, 232, 232);
-}
-
+/* Images */
 img {
-    min-width: 80%;
-    max-height: 400px;
+    width: 80% ;
+    max-height: 80%;
     margin: 20px;
 }
 
@@ -105,6 +76,7 @@ img {
     margin: 20px;
 }
 
+/* Form Containers */
 .container .search-container,
 .container .compare-container {
     display: flex;
@@ -112,11 +84,10 @@ img {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    max-width: 100%;
-    width: 90%;
+    width: 80%;
     padding: 5%;
     border: 1px solid rgb(97, 96, 98);
-    border-radius: 5px; /* Apply border radius */
+    border-radius: 5px; 
 }
 
 .container .search-container form,
@@ -140,15 +111,8 @@ img {
     width: 90%;
     background-color: black;
     border: 1px solid #b3b0b5ff;
-    border-radius: 5px; /* Apply border radius */
+    border-radius: 5px; 
     padding: 5px 10px;
-}
-
-.container .search-container h2,
-.container .compare-container h2 {
-    font-size: 20px;
-    text-align: center;
-    font-family: 'SubFont';
 }
 
 .container .search-container button[type="submit"],
@@ -157,8 +121,7 @@ img {
     min-height: 40px;
     width: 100%;
     border: 2px solid #ff6600ff;
-    border-radius: 5px; /* Apply border radius */
-
+    border-radius: 5px; 
 }
 
 button[type="submit"] {
@@ -173,7 +136,7 @@ button[type="submit"] {
     text-align: center;   
 }
 
-
+/* Form Inputs */
 .container .search-container form input:hover,
 .container .compare-container form input:hover,
 .container .search-container form select:hover,
@@ -181,6 +144,7 @@ button[type="submit"] {
     background-color: #333;
     color: #fff;
 }
+
 .container .search-container form button:hover,
 .container .compare-container form button:hover {
     background-color: #ff6600ff;
@@ -188,7 +152,9 @@ button[type="submit"] {
 }
 
 .container .search-container form input,
-.container .compare-container form input{
+.container .compare-container form input,
+.container .search-container form select,
+.container .compare-container form select {
     margin-top: 20px;
     margin-bottom: 20px;
     min-height: 40px;
@@ -204,53 +170,12 @@ button[type="submit"] {
     appearance: none; 
 }
 
-.container .search-container form select,
-.container .compare-container form select {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    min-height: 40px;
-    width: 80%;
-    background-color: black;
-    color: #fff;
-    border: 1px solid #b3b0b5ff;
-    border-radius: 5px; /* Apply border radius */
-    padding: 5px 10px;
-    font-family: 'TitleFont';
-    font-size: 15px;
-    text-align: center;
-    appearance: none; 
-}
-
-.container .search-container form select option,
-.container .compare-container form select option {
-    background-color: black;
-    color: #fff;
-}
-
-.container .search-container form select::-ms-expand,
-.container .compare-container form select::-ms-expand {
-    display: none; 
-}
-
-.container .search-container form select::-webkit-scrollbar,
-.container .compare-container form select::-webkit-scrollbar {
-    display: none; 
-}
-
-/* search page */
-
-.car-img {
-    width: auto;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* compre page */
-
+/* Table Styling */
 table {
     width: 80%;
     border-collapse: collapse;
 }
+
 th, td {
     padding: 8px;
     text-align: center;
@@ -258,10 +183,28 @@ th, td {
     font-family: "TitleFont";
     font-weight: 100;
     font-size: 20px;
-    text-align: center;
     color: rgb(232, 232, 232);
 }
+
 th {
     background-color: #f2f2f2;
     color: rgb(7, 7, 7);
+}
+
+.details-table {
+    width: 100%;
+    margin: auto; 
+}
+
+.details-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.details-table td:first-child {
+    font-weight: bold;
+}
+
+.details-table td:last-child {
+    text-align: center; 
 }
